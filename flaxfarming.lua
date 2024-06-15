@@ -1,3 +1,13 @@
+local function itemHandling()
+if turtle.getItemSpace() == 0 then
+ if turtle.getSelectedSlot() == 16 then
+ turtle.select(1)
+ else
+ turtle.select(turtle.getSelectedSlot() + 1)
+  end
+end
+end
+
 local function cropHandling()
 local downSuccess, downData = turtle.inspectDown()
 local frontSuccess, frontData = turtle.inspect()
@@ -60,16 +70,6 @@ local function fuelHandling()
    end
   end
  end
-end
-
-local function itemHandling()
-if turtle.getItemSpace() == 0 then
- if turtle.getSelectedSlot() == 16 then
- turtle.select(1)
- else
- turtle.select(turtle.getSelectedSlot() + 1)
-  end
-end
 end
 
 T = 1
