@@ -45,6 +45,7 @@ if has_block then
    chest.pushItems(turtleName, x, 64, i)
   end
  end
+ turtle.select(1)
 end
 end
 end
