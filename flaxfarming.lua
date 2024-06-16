@@ -1,30 +1,29 @@
 local function itemHandling()
-if turtle.getItemSpace() == 0 then
+if turtle.getItemCount() == 0 then
  if turtle.getSelectedSlot() == 16 then
  turtle.select(1)
- else
+ end
  turtle.select(turtle.getSelectedSlot() + 1)
-  end
 end
 end
 
 local height = 0
 local function countUp()
-assert(turtle.up())
+turtle.up()
  if height == 1 then
 
  else
   height = height + 1
-end
+ end
 end
 
 local function countDown()
-assert(turtle.down())
-  if height == 0 then
+turtle.down()
+ if height == 0 then
 
-  else
-   height = height - 1
-end
+ else
+ height = height - 1
+ end
 end
 
 local function cropHandling()
@@ -40,17 +39,16 @@ if downSuccess then
 end
 
 if not downSuccess then
+ itemHandling()
+ turtle.placeDown()
+ countDown()
   if select(2, turtle.inspectDown()).name == "minecraft:water" then
-
-  else
-  itemHandling()
-  turtle.placeDown()
-  countDown()
+   countUp()
  end
 end
 
 if select(2, turtle.inspect()).name == "supplementaries:flax" then
-  countUp()
+ countUp()
 end
 end
 
@@ -59,7 +57,7 @@ local storage = "minecraft:barrel"
  local has_block, data = turtle.inspect()
  if has_block then
   if data.name == storage then
-  local modem = peripheral.wrap("back")
+  local modem = peripheral.wrap("front")
   local turtleName = modem.getNameLocal()
   local chest = peripheral.find(storage)
    for i = 1, 16 do
@@ -76,7 +74,7 @@ local function fuelHandling()
  local has_block, data = turtle.inspect()
  if has_block then
   if data.name == "computercraft:wired_modem_full" then
-  local modem = peripheral.wrap("front")
+  local modem = peripheral.wrap("right")
   local turtleName = modem.getNameLocal()
   local chest = peripheral.find("coxinhautilities:wooden_hopper")
    if turtle.getFuelLevel() < 800 then
@@ -104,19 +102,23 @@ local rotations = 0
 FLAG = true
 while FLAG do
 if turns == 17 then
- for i = 1,length-1 do
-  cropHandling()
-  assert(turtle.forward())
+ for i = 1,17 do
+  if i < 17 then
+   cropHandling()
+   assert(turtle.forward())
+  else
+   cropHandling()
+   countUp()
  end
  assert(turtle.turnLeft())
  assert(shell.execute("go", "forward", "17"))
- fuelHandling()
- storageHandling()
  assert(turtle.turnLeft())
+ fuelHandling()
 else
  local has_block, data = turtle.inspect()
  if has_block then
  if data.name ~= "supplementaries:flax" then
+  storageHandling()
   if rotations == 0 then
    cropHandling()
    assert(turtle.turnLeft())
