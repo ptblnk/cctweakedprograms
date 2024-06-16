@@ -48,6 +48,10 @@ if not downSuccess then
   countDown()
  end
 end
+
+if select(2, turtle.inspect()).name == "supplementaries:flax" then
+  countUp()
+end
 end
 
 local function storageHandling()
