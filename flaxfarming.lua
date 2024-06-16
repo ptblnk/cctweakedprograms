@@ -31,7 +31,6 @@ local function cropHandling()
 local downSuccess, downData = turtle.inspectDown()
 if downSuccess then
  if downData.state.age == 7 then
-  turtle.select(1)
   turtle.digDown()
   turtle.digDown()
   countDown()
@@ -56,7 +55,7 @@ local storage = "minecraft:barrel"
  local has_block, data = turtle.inspect()
  if has_block then
   if data.name == storage then
-  local modem = peripheral.wrap("front")
+  local modem = peripheral.wrap("back")
   local turtleName = modem.getNameLocal()
   local chest = peripheral.find(storage)
    for i = 1, 16 do
@@ -89,7 +88,8 @@ local function startUp()
 turtle.digDown()
 turtle.digDown()
 countDown()
-cropHandling()
+itemHandling()
+turtle.placeDown()
 end
 
 startUp()
@@ -107,10 +107,12 @@ if turns == 17 then
  assert(turtle.turnLeft())
  assert(shell.execute("go", "forward", "17"))
  fuelHandling()
+ storageHandling()
  assert(turtle.turnLeft())
 else
- if select(2, turtle.inspect()).name ~= "supplementaries:flax" then
-  storageHandling()
+ local has_block, data = turtle.inspect()
+ if has_block then
+ if data.name ~= "supplementaries:flax" then
   if rotations == 0 then
    cropHandling()
    assert(turtle.turnLeft())
@@ -137,4 +139,5 @@ end
 
 cropHandling()
 assert(turtle.forward())
+end
 end
