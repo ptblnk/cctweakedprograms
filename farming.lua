@@ -44,7 +44,6 @@ else
   if rotations == 0 then
    cropHandling()
    assert(turtle.turnLeft())
-   cropHandling()
    assert(turtle.forward())
    assert(turtle.turnLeft())
    rotations = rotations + 1
@@ -52,7 +51,6 @@ else
   elseif rotations == 1 then
    cropHandling()
    assert(turtle.turnRight())
-   cropHandling()
    assert(turtle.forward())
    assert(turtle.turnRight())
    rotations = rotations - 1
