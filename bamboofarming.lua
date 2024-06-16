@@ -6,6 +6,7 @@ local success, data = turtle.inspect()
 if success then
  if data.name == "minecraft:bamboo" then
   turtle.dig()
+  turtle.dig()
  end
 end
 end
