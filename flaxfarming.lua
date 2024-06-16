@@ -101,15 +101,16 @@ local turns = 0
 local rotations = 0
 FLAG = true
 while FLAG do
-if turns == 17 then
- for i = 1,17 do
-  if i < 17 then
+if turns == length then
+ for i = 1,length do
+  if i < length then
    cropHandling()
    assert(turtle.forward())
   else
    cropHandling()
    countUp()
  end
+end
  assert(turtle.turnLeft())
  assert(shell.execute("go", "forward", "17"))
  assert(turtle.turnLeft())
