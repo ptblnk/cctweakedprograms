@@ -1,3 +1,6 @@
+LENGTH = 17
+FLAG = true
+
 local function itemHandling()
 if turtle.getItemCount() == 0 then
  if turtle.getSelectedSlot() == 16 then
@@ -26,6 +29,43 @@ turtle.down()
  end
 end
 
+
+local function storageHandling()
+local storage = "minecraft:barrel"
+local has_block, data = turtle.inspect()
+if has_block then
+ if data.name == "computercraft:wired_modem_full" then
+ local modem = peripheral.wrap("front")
+ local turtleName = modem.getNameLocal()
+ local chest = peripheral.find(storage)
+ turtle.select(1)
+ for x = 1, 1 do
+  for i = 1, 15 do
+   turtle.select(i)
+   chest.pushItems(turtleName, x, 64, i)
+  end
+ end
+end
+end
+end
+
+local function fuelHandling()
+local storage = "coxinhautilities:wooden_hopper"
+local has_block, data = turtle.inspect()
+ if has_block then
+  if data.name == "computercraft:wired_modem_full" then
+   local modem = peripheral.wrap("right")
+   local turtleName = modem.getNameLocal()
+   local chest = peripheral.find(storage)
+   if turtle.getFuelLevel() < 1600 then
+    chest.pushItems(turtleName, 1, 1, 16)
+    turtle.select(16)
+    turtle.refuel()
+   end
+  end
+ end
+end
+
 local function cropHandling()
 local downSuccess, downData = turtle.inspectDown()
 if downSuccess then
@@ -37,7 +77,6 @@ if downSuccess then
   turtle.placeDown()
  end
 end
-
 if not downSuccess then
  itemHandling()
  turtle.placeDown()
@@ -52,55 +91,10 @@ if select(2, turtle.inspect()).name == "supplementaries:flax" then
 end
 end
 
-local function storageHandling()
-local storage = "minecraft:chest"
-local modem = peripheral.wrap("front")
-local turtleName = modem.getNameLocal()
-local chest = peripheral.find(storage)
-local has_block, data = turtle.inspect()
-if has_block then
- if data.name == "computercraft:wired_modem_full" then
-  for x = 1, 1 do
-   for i = 1, 16 do
-    turtle.select(i)
-    chest.pushItems(turtleName, x, 64, i)
-   end
-  end
- end
-end
-end
-
-local function startUp()
-turtle.digDown()
-turtle.digDown()
-countDown()
-itemHandling()
-turtle.placeDown()
-end
-
-startUp()
-
-local length = 17
 local turns = 0
 local rotations = 0
-FLAG = true
-while FLAG do
-if turns == length then
- for i = 1,length do
-  if i < length then
-   cropHandling()
-   assert(turtle.forward())
-  else
-   cropHandling()
-   countUp()
- end
-end
- assert(turtle.turnLeft())
- assert(shell.execute("go", "forward", "17"))
- assert(turtle.turnLeft())
- fuelHandling()
-else
- local has_block, data = turtle.inspect()
+local function turnHandling()
+local has_block, data = turtle.inspect()
  if has_block then
  if data.name ~= "supplementaries:flax" then
   storageHandling()
@@ -127,7 +121,25 @@ else
   end
  end
 end
+end
 
+while FLAG do
+if turns == LENGTH then
+ for i = 1,LENGTH do
+  if i < LENGTH then
+   cropHandling()
+   assert(turtle.forward())
+  else
+   cropHandling()
+   countUp()
+  end
+ end
+ assert(turtle.turnLeft())
+ assert(shell.execute("go", "forward", "17"))
+ assert(turtle.turnLeft())
+ fuelHandling()
+else
+ turnHandling()
 cropHandling()
 assert(turtle.forward())
 end
