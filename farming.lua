@@ -1,5 +1,6 @@
 FLAG = true
-LENGTH = 17
+LENGTH = 18
+WIDTH = 18
 
 local function cropHandling()
 local downSuccess, downData = turtle.inspectDown()
@@ -14,7 +15,7 @@ local function fuelHandling()
  local has_block, data = turtle.inspect()
  if has_block then
   if data.name == "computercraft:wired_modem_full" then
-  local modem = peripheral.wrap("right")
+  local modem = peripheral.wrap("front")
   local turtleName = modem.getNameLocal()
   local chest = peripheral.find("coxinhautilities:wooden_hopper")
    if turtle.getFuelLevel() < 1600 then
@@ -30,15 +31,21 @@ end
 local turns = 0
 local rotations = 0
 while FLAG do
-if turns == 17 then
- for i = 1,LENGTH-1 do
+if turns == LENGTH-1 then
+ for i = 1,LENGTH-2 do
   cropHandling()
+  print("l-movement:", i)
   assert(turtle.forward())
  end
  assert(turtle.turnLeft())
- assert(shell.execute("go", "forward", "17"))
- assert(turtle.turnLeft())
+ for i = 1,WIDTH-1 do
+  print("w-movement:", i) 
+  assert(turtle.forward())
+ end
  fuelHandling()
+ assert(turtle.turnLeft())
+ turns = 0
+ rotations = 0
 else
  if turtle.detect() then
   if rotations == 0 then
