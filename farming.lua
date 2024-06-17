@@ -30,23 +30,6 @@ end
 local turns = 0
 local rotations = 0
 while FLAG do
-if turtle.detect() then
- if rotations == 0 then
-  cropHandling()
-  assert(turtle.turnLeft())
-  assert(turtle.forward())
-  assert(turtle.turnLeft())
-  rotations = rotations + 1
-  turns = turns + 1
- elseif rotations == 1 then
-  cropHandling()
-  assert(turtle.turnRight())
-  assert(turtle.forward())
-  assert(turtle.turnRight())
-  rotations = rotations - 1
-  turns = turns + 1
- end
-else
 if turns == 17 then
  for i = 1,LENGTH-1 do
   cropHandling()
@@ -56,8 +39,26 @@ if turns == 17 then
  assert(shell.execute("go", "forward", "17"))
  assert(turtle.turnLeft())
  fuelHandling()
+else
+ if turtle.detect() then
+  if rotations == 0 then
+   cropHandling()
+   assert(turtle.turnLeft())
+   assert(turtle.forward())
+   assert(turtle.turnLeft())
+   rotations = rotations + 1
+   turns = turns + 1
+  elseif rotations == 1 then
+   cropHandling()
+   assert(turtle.turnRight())
+   assert(turtle.forward())
+   assert(turtle.turnRight())
+   rotations = rotations - 1
+   turns = turns + 1
+  end
+ end
 end
-end
+
 cropHandling()
 assert(turtle.forward())
 end
