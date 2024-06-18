@@ -98,6 +98,7 @@ if frontData.name == "supplementaries:flax" then
   countUp()
  end
 end
+assert(turtle.forward())
 end
  
 local turns = 0
@@ -106,26 +107,25 @@ local function turnHandling()
 local has_block, data = turtle.inspect()
  if has_block then
  if data.name ~= "supplementaries:flax" then
-  cropHandling()
   if height == 0 and turns == 0 then
    countUp()
   end
   storageHandling()
   if rotations == 0 then
    assert(turtle.turnLeft())
-   if height == 0 and turtle.detect() then
-    countUp()
-   end
-   assert(turtle.forward())
+   --if height == 0 and turtle.detect() then
+   -- countUp()
+   --end
+   cropHandling()
    assert(turtle.turnLeft())
    rotations = rotations + 1
    turns = turns + 1
   elseif rotations == 1 then
    assert(turtle.turnRight())
-   if height == 0 and turtle.detect() then
-    countUp()
-   end
-   assert(turtle.forward())
+   --if height == 0 and turtle.detect() then
+   -- countUp()
+   --end
+   cropHandling()
    assert(turtle.turnRight())
    rotations = rotations - 1
    turns = turns + 1
@@ -138,7 +138,6 @@ while FLAG do
 if turns == LENGTH-1 then
  for i = 1,LENGTH-2 do
   cropHandling()
-  assert(turtle.forward())
   end
  assert(turtle.turnLeft())
  if height == 0 then
@@ -154,7 +153,6 @@ if turns == LENGTH-1 then
 else
 turnHandling()
 cropHandling()
-assert(turtle.forward())
 end
 end
  
