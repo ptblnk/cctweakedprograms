@@ -43,12 +43,10 @@ while FLAG do
 if turns == LENGTH-1 then
  for i = 1,LENGTH-2 do
   cropHandling()
-  assert(turtle.forward())
  end
  assert(turtle.turnLeft())
  for i = 1, WIDTH-1 do
   cropHandling()
-  assert(turtle.forward())
  end
  fuelHandling()
  assert(turtle.turnLeft())
