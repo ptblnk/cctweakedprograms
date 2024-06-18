@@ -60,9 +60,9 @@ local has_block, data = turtle.inspect()
    local turtleName = modem.getNameLocal()
    local chest = peripheral.find(storage)
    if turtle.getFuelLevel() < 1600 then
-    chest.pushItems(turtleName, 1, 1, 16)
     turtle.select(16)
     turtle.drop()
+    chest.pushItems(turtleName, 1, 1, 16)
     turtle.refuel()
    end
   end
