@@ -41,7 +41,7 @@ if has_block then
  local chest = peripheral.find(storage)
  turtle.select(1)
  for x = 1, 1 do
-  for i = 1, 15 do
+  for i = 1, 6 do
    turtle.select(i)
    chest.pushItems(turtleName, x, 64, i)
   end
