@@ -62,6 +62,7 @@ local has_block, data = turtle.inspect()
    if turtle.getFuelLevel() < 1600 then
     chest.pushItems(turtleName, 1, 1, 16)
     turtle.select(16)
+    turtle.drop()
     turtle.refuel()
    end
   end
