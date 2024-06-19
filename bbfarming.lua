@@ -21,18 +21,15 @@ assert(turtle.forward())
 end
  
 local function fuelHandling()
- local has_block, data = turtle.inspect()
- if has_block then
-  if data.name == "computercraft:wired_modem_full" then
-  local modem = peripheral.wrap("front")
-  local turtleName = modem.getNameLocal()
-  local chest = peripheral.find("coxinhautilities:wooden_hopper")
-   if turtle.getFuelLevel() < 1600 then
-   chest.pushItems(turtleName, 1, 1, 16)
-   turtle.select(16)
-   turtle.refuel()
-   end
-  end
+local storage = "tconstruct:seared_table"
+ if select(2, turtle.inspect()).name == storage then
+  turtle.select(16)
+  turtle.drop()
+  sleep(0.5)
+  turtle.suck()
+  turtle.refuel()
+  turtle.getFuelLevel()
+  turtle.select(1)
  end
 end
  
