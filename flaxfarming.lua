@@ -38,6 +38,7 @@ if select(2, turtle.inspect()).name == storage then
    turtle.select(i)
    turtle.suck()
  end
+turtle.select(1)
 end
 end
  
