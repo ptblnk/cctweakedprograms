@@ -47,7 +47,7 @@ if turns == LENGTH-1 then
  end
  fuelHandling()
  assert(turtle.turnLeft())
- for i = 1, 16 do
+ for i = 1, 15 do
   turtle.select(i)
   turtle.drop()
  end
