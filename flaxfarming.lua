@@ -33,39 +33,24 @@ end
  
 local function storageHandling()
 local storage = "minecraft:barrel"
-local has_block, data = turtle.inspect()
-if has_block then
- if data.name == "computercraft:wired_modem_full" then
- local modem = peripheral.wrap("front")
- local turtleName = modem.getNameLocal()
- local chest = peripheral.find(storage)
- turtle.select(1)
- for x = 1, 1 do
-  for i = 1, 15 do
+if select(2, turtle.inspect()).name == storage then
+ for i = 1, 15 do
    turtle.select(i)
-   chest.pushItems(turtleName, x, 64, i)
-  end
+   turtle.suck()
  end
- turtle.select(1)
-end
 end
 end
  
 local function fuelHandling()
-local storage = "coxinhautilities:wooden_hopper"
-local has_block, data = turtle.inspect()
- if has_block then
-  if data.name == "computercraft:wired_modem_full" then
-   local modem = peripheral.wrap("front")
-   local turtleName = modem.getNameLocal()
-   local chest = peripheral.find(storage)
-   if turtle.getFuelLevel() < 1600 then
-    turtle.select(16)
-    turtle.drop()
-    chest.pushItems(turtleName, 1, 1, 16)
-    turtle.refuel()
-   end
-  end
+local storage = "tconstruct:seared_table"
+ if select(2, turtle.inspect()).name == storage then
+  turtle.select(16)
+  turtle.drop()
+  sleep(0.5)
+  turtle.suck()
+  turtle.refuel()
+  turtle.getFuelLevel()
+  turtle.select(1)
  end
 end
  
