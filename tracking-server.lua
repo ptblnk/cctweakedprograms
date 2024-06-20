@@ -1,6 +1,3 @@
-term.clear()
-term.setCursorPos(1, 1)
- 
 peripheral.find("modem", rednet.open)
  
 local monitor = peripheral.find("monitor")
