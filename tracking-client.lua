@@ -9,7 +9,7 @@ local data = scanner.scan("player", 24)
 if data ~= nil then
  for i = 1, #data do
   if data[i] ~= nil then
-   msg = msg .. data[i]["displayName"] .. " | HP: " .. data[i]["health"] .. "\n"
+   msg = msg .. data[i]["displayName"] .. "\n"
   end
  end
  for i = 1, 5 do
