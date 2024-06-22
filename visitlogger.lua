@@ -1,9 +1,10 @@
 OWNER = "" -- insert UUID
 
-scanner = peripheral.find("universal_scanner")
 location = vector.new(0, 0, 0) -- enter computer location here
 logfile = fs.open("logs.txt", "a")
- 
+
+local scanner = peripheral.find("universal_scanner")
+
 while true do
 local log = os.date("%d.%m.%y %H:%M:%S")
 local data = scanner.scan("player", 6)
