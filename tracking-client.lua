@@ -2,7 +2,8 @@ HOSTNAME = os.computerLabel() -- set label using "label set NAME"
 LOCATION = vector.new(0, 0, 0) -- insert computer location here
  
 peripheral.find("modem", rednet.open)
-scanner = peripheral.find("universal_scanner")
+
+local scanner = peripheral.find("universal_scanner")
  
 while true do
 local msg = HOSTNAME .. "'s:\n"
