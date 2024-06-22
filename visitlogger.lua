@@ -12,7 +12,7 @@ if data ~= nil then
  for i = 1, #data do
   if data[i] ~= nil then
    if data[i]["uuid"] ~= OWNER then
-    local coords = location:add(vector.new(data[i]["x"], data[i]["y"], data[i]["z"]+1)) -- +1 to z because the scanner coordinate for Z is inaccurate.
+    local coords = location:add(vector.new(data[i]["x"], data[i]["y"], data[i]["z"]))
     log = log .. "\n" .. data[i]["displayName"] .. ": " .. tostring(coords) .. "\n"
    end
   end
