@@ -11,7 +11,7 @@ local data = scanner.scan("player", 24)
 if data ~= nil then
  for i = 1, #data do
   if data[i] ~= nil then
-   local coords = LOCATION:add(vector.new(data[i]["x"], data[i]["y"], data[i]["z"]+1))
+   local coords = LOCATION:add(vector.new(data[i]["x"], data[i]["y"], data[i]["z"]))
    msg = msg .. data[i]["displayName"] .. " | " .. tostring(coords) .. "\n"
   end
  end
